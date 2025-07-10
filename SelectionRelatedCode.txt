@@ -1,0 +1,6 @@
+'selection of data in the sheet
+Sub SelectionCell(startRange As String)
+    Range(startRange).Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Range(Selection, Selection.End(xlToRight)).Select
+End Sub

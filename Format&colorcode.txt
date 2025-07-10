@@ -1,0 +1,32 @@
+'Cell formatting whenever we get any answer
+Sub Formatting()
+    Cells.Select
+    Cells.RowHeight = 20
+    Cells.VerticalAlignment = xlCenter
+    Cells.EntireColumn.AutoFit
+End Sub
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+
+'To set background color for the cells
+Sub SetBackgroundColor(ColorName As String)
+    Select Case LCase(ColorName)
+        Case "darkred"
+            Selection.Interior.Color = 192
+        Case "red"
+            Selection.Interior.Color = 255
+        Case "orange"
+            Selection.Interior.Color = 49407
+        Case "yellow"
+            Selection.Interior.Color = 65535
+        Case "green"
+            Selection.Interior.Color = 5296274
+        Case "darkgreen"
+            Selection.Interior.Color = 5287936
+        Case "blue"
+            Selection.Interior.Color = 15773696
+        Case "darkblue"
+            Selection.Interior.Color = 12611584
+    End Select
+End Sub

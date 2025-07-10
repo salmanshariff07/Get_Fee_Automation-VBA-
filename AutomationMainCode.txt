@@ -1,0 +1,115 @@
+'Code to convert the dump data into a format which can help us use data
+Sub ConvertDump()
+
+Worksheets("Fee Data").Select
+    Call SelectionRelatedCode.SelectionCell("A2")
+Selection.Clear
+    Call SelectionRelatedCode.SelectionCell("A2")
+Selection.Clear
+    Range("G1").Clear
+Worksheets("Dump").Select
+    Call SelectionRelatedCode.SelectionCell("A1")
+Selection.Copy
+
+Worksheets("Fee Data").Select
+    Range("A2").Select
+    ActiveCell.PasteSpecial Paste:=xlPasteValues
+Application.CutCopyMode = False
+Worksheets("Fee Data").Select
+
+End Sub
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+'Finding the dividend details for the other statused pending payments
+Sub GetDividendFeeDetails()
+Range("E2").Select
+'looping untill we get fee for all the unpaid dividends
+    Do While ActiveCell.Value <> ""
+        DividendStatus = ActiveCell.Value
+        Select Case DividendStatus
+            Case "Unclaimed"
+                ActiveCell.Offset(0, 2).Value = 0
+            Case "Paid"
+                ActiveCell.Offset(0, 2).Value = "NA"
+            Case Else
+                FeeAmount = ActiveCell.Offset(0, -1).Value
+                    Select Case FeeAmount
+                        Case Is <= 9
+                            ActiveCell.Offset(0, 2).Value = "No Fee"
+                        Case 10 To 50
+                            ActiveCell.Offset(0, 2).Value = 7.5
+                        Case 50 To 100
+                            ActiveCell.Offset(0, 2).Value = 10
+                        Case 100 To 200
+                            ActiveCell.Offset(0, 2).Value = 20
+                        Case 201 To 500
+                            ActiveCell.Offset(0, 2).Value = 50
+                        Case Is >= 500
+                            ActiveCell.Offset(0, 2).Value = 100
+                    End Select
+        End Select
+        ActiveCell.Offset(1, 0).Select
+    Loop
+
+'after the fee is been pulled for all we are adding everything in the last column
+ActiveCell.Offset(0, -1).Value = "Total Dividend"
+ActiveCell.Value = "=Sum(D:D)"
+ActiveCell.Offset(0, 3).Select
+ActiveCell.Offset(0, -1).Value = "Total Fee"
+ActiveCell.Value = "=Sum(G:G)"
+Range(ActiveCell, ActiveCell.Offset(0, -4)).Select
+    Call FormattingCode.SetBackgroundColor("Green")
+    Call FormattingCode.Formatting
+Columns(3).NumberFormat = "mm/dd/yyyy"
+ActiveCell.End(xlToRight).Select
+ActiveCell.End(xlDown).Select
+
+End Sub
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+'for calculating the unclaimed statuses payment
+Sub GetUnclaimedFee()
+Range("D2").Select
+ActiveCell.End(xlDown).Select
+ActiveCell.Offset(1, 0).Select
+ActiveCell.Value = "Total Dividend"
+ActiveCell.Offset(0, 1).Value = "=Sum(D:D)"
+ActiveCell.Offset(1, 0).Select
+ActiveCell.Value = "Total Fee"
+ActiveCell.Offset(0, 1).Select
+    
+    FeeAmount = ActiveCell.Offset(-1, 0).Value
+    Select Case FeeAmount
+        Case Is < 9
+            ActiveCell.Value = "No Fee"
+        Case 10 To 50
+            ActiveCell.Value = 7.5
+        Case 50 To 100
+            ActiveCell.Value = 10
+        Case 100 To 200
+            ActiveCell.Value = 20
+        Case 201 To 500
+            ActiveCell.Value = 50
+        Case Is > 500
+            ActiveCell.Value = 100
+    End Select
+
+Range(ActiveCell, ActiveCell.Offset(-1, 0)).Select
+Range(Selection, Selection.Offset(0, -1)).Select
+    Call FormattingCode.SetBackgroundColor("Red")
+    Call FormattingCode.Formatting
+Columns(3).NumberFormat = "mm/dd/yyyy"
+
+ActiveCell.End(xlToRight).Select
+ActiveCell.End(xlDown).Select
+
+End Sub
+
+
+
+
