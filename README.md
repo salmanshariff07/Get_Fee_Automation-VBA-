@@ -1,14 +1,14 @@
 # Dividend Reissue Fee Automation Tool (VBA)
 
-#From 10 Minutes to Under 10 Seconds — Automating a Manual Workflow with VBA
+## From 10 Minutes to Under 10 Seconds — Automating a Manual Workflow with VBA
 
 
-#Project Overview
+## Project Overview
 This VBA Macro project automates the calculation and extraction of dividend reissue fees, a process that previously took ~10 minutes manually. With this tool, the same workflow is now completed in under 10 seconds — drastically improving efficiency and accuracy.
 
 The tool supports call center agents by speeding up responses to fee-related queries and helping maintain optimal average handling time (AHT).
 
-#What the code Does:
+## What the code Does:
 
 -<a href = "https://github.com/salmanshariff07/Get_Fee_Automation-VBA-/blob/main/AutomationMainCode.txt">AutomationMainCode
 
@@ -34,7 +34,7 @@ On the Unclaimed Sheet, clicking "Get Unclaimed Fee" calculates:
 Total number of unclaimed payments
 Total fee amount for those payments
 
-#Business Impact
+## Business Impact
 
 ⏳ Reduced time from 10 minutes to <10 seconds
 📞 Supports call center efficiency & AHT targets
@@ -42,7 +42,7 @@ Total fee amount for those payments
 🔄 Reusable tool for ongoing fee processing
 
 
-#How to Use the below project:
+## How to Use the below project:
 
 - <a href = "https://github.com/salmanshariff07/Get_Fee_Automation-VBA-/blob/main/Dividend_fee_VBAProject.xlsm"> Dividend_Fee_VBAProject
 
